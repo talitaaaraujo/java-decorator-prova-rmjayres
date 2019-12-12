@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+        
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Teste Decorator</title>
+        <link rel="StyleSheet" type="text/css" href="css/style.css" media="screen"/>
+        
+    </h:head>
+
+    <h:body>
+        
+        <f:view>
+            <img src="http://www.amagiadomundodosnegocios.com/wp-content/uploads/2016/08/Subway.jpg" style="width: 98%"/>
+            
+            <h:form>
+                <div class="Pedido">
+                    <fieldset>
+                        <legend>Lanche</legend>
+                        <div class="form-group col-md-4">
+                            <p:outputLabel for="@next" value="Informe o tamanho do seu lanche 1-15cm 2-30cm:"/>
+                            <p:selectOneMenu value="#{lancheBean.tamLanche}">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="1-15cm" itemValue="1"/>
+                                <f:selectItem itemLabel="2-30cm" itemValue="2"/>
+                            </p:selectOneMenu>
+                        </div>
+                        
+                        <div class="form-group col-md-4">
+                            <p:outputLabel for="@next" value="Pão:  " />
+                            <p:selectOneMenu value="#{lancheBean.tipoPao}">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="Parmesão e orégano" itemValue="1"/>
+                                <f:selectItem itemLabel="9 grãos " itemValue="2"/>
+                                <f:selectItem itemLabel="Três queijos" itemValue="3"/>
+                                <f:selectItem itemLabel="Italiano Branco" itemValue="4"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <p:outputLabel for="@next" value="Carne:  " />
+                            <p:selectOneMenu value="#{lancheBean.tipoCarne}">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="Frango" itemValue="1"/>
+                                <f:selectItem itemLabel="Bacon" itemValue="2"/>
+                                <f:selectItem itemLabel="Calabresa " itemValue="3"/>
+                                <f:selectItem itemLabel="Hamburguer" itemValue="4"/>
+                            </p:selectOneMenu>
+                            
+                        </div>
+                        <div class="form-group col-md-4">
+                             <p:outputLabel for="@next" value="Queijo:  " />
+                           <p:selectOneMenu value="#{lancheBean.tipoQueijo}">
+                               <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="Cheddar" itemValue="1"/>
+                                <f:selectItem itemLabel="Mussarela" itemValue="2"/>
+                                <f:selectItem itemLabel="Prato" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <p:outputLabel for="@next" value="Salada:  " />
+                            <p:selectOneMenu value="#{lancheBean.tipoSalada}">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="Pepino" itemValue="1"/>
+                                <f:selectItem itemLabel="Alface" itemValue="2"/>
+                                <f:selectItem itemLabel="Tomate" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <p:outputLabel for="@next" value="Molho:" />
+                            <p:selectOneMenu value="#{lancheBean.tipoMolho}">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="Barbecue" itemValue="1"/>
+                                <f:selectItem itemLabel="Maionese" itemValue="2"/>
+                                <f:selectItem itemLabel="Mostarda" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Bebida:</legend>
+                        <div class="form-group col-md-4">
+                            <p:outputLabel for="@next" value="Tamanho bebida:" />          
+                            <p:selectOneMenu value="#{lancheBean.tamBebida}">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="350ml" itemValue="1"/>
+                                <f:selectItem itemLabel="500ml" itemValue="2"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <p:outputLabel for="@next" value="Sucos:" />          
+                            <p:selectOneMenu value="#{lancheBean.tipoSuco}">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="Maracuja" itemValue="1"/>
+                                <f:selectItem itemLabel="Laranja" itemValue="2"/>
+                                <f:selectItem itemLabel="Abacaxi" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <p:outputLabel for="@next" value="Refrigerantes"/>
+                            <p:selectOneMenu value="#{lancheBean.tipoRefri}">
+                                <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                <f:selectItem itemLabel="Coca-Cola" itemValue="1"/>
+                                <f:selectItem itemLabel="Fanta" itemValue="2"/>
+                                <f:selectItem itemLabel="Sprite" itemValue="3"/>
+                            </p:selectOneMenu>
+                        </div>
+                    </fieldset>
+                </div>
+                <p:commandButton id="btnFinalizar" value="Finalizar" action="#{lancheBean.finalizar}" 
+                                 update="msgGeral, finalizedController, descLanche, valLanche, descBebida, valBebida, valTotal"
+                                 oncomplete="displayController()"  />
+                <p:growl id="msgGeral" globalOnly="true" showDetail="true"/>
+                <fieldset>
+                    <legend>Pedido:</legend>
+                    <h:inputText class="finalizedController" id="finalizedController" value="#{lancheBean.finilized}"/>
+                    <h:panelGroup class="finalizedPanel" id="panelData" style="display: none;">
+                        <hr/>
+                        <p:outputLabel id="descLanche" value="#{lancheBean.descricaoLanche}"/>
+                        <hr/>
+                        <p:outputLabel id="valLanche" value="Valor Lanche #{lancheBean.valorLanche}"/>
+                        <hr/>
+                        <p:outputLabel id="descBebida" value="#{lancheBean.descricaoBebida}"/>
+                        <hr/>
+                        <p:outputLabel id="valBebida" value="Valor Bebida: #{lancheBean.valorBebida}"/>
+                        <hr/>
+                        <p:outputLabel id="valTotal" value="Total Final: #{lancheBean.valTotal}"/>
+                    </h:panelGroup>
+                </fieldset>
+            </h:form>
+        </f:view>
+    </h:body>
+    
+    <script>
+        function displayController(){
+            
+            document.getElementsByClassName('finalizedController')[0].style.display = "none";
+            
+            if( document.getElementsByClassName('finalizedController')[0].value == "true" ){
+                document.getElementsByClassName('finalizedPanel')[0].style.display = "block";
+            }
+            else{
+                document.getElementsByClassName('finalizedPanel')[0].style.display = "none";
+            }
+        }
+    </script>
+</html>
